@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Mitr:wght@400;600;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+html,
+body,
+#root,
+.app,
+.content {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+html,
+body,
+app {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.fc-list-event-graphic{
+  display: none !important; 
+}
+
+
+.fc-list-event-title {
+  padding-left: 10px !important;
+  font-size: 0.9rem !important;
+  width: 100%;
+  color: white;
+}
+
+.fc-list-event-title div {
+  padding: 5px 10px; /* Adjust as needed */
+}
+
+.fc-list-event-time {
+  display: none !important;
+}
+
+.fc-list-day {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  background-color: #333 !important;
+  color: white !important;
+}

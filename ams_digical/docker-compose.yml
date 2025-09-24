@@ -1,0 +1,35 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+
+    container_name: react_frontend
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./frontend:/app
+    stdin_open: true
+    tty: true
+
+    depends_on:
+      - backend
+
+  #completely optional, this is just if we want to run both the django server directly and the react front end, for testing purposes etc...
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+
+    container_name: django_backend
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - .:/app
+
+    # depends_on:
+    #   - frontend

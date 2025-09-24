@@ -1,0 +1,22 @@
+.modal-dialog {
+    max-width: none; /* Remove Bootstrap's max-width limit */
+    width: 50vw; /* Allow it to size based on content */
+  }
+  
+  /* Responsive Modal */
+.responsive-modal .modal-dialog {
+    max-width: 90%; /* Shrinks modal width for smaller screens */
+    margin: 1rem auto;
+}
+
+@media (min-width: 768px) {
+    .responsive-modal .modal-dialog {
+        max-width: 700px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-modal .modal-dialog {
+        max-width: 900px;
+    }
+}

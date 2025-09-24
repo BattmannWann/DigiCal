@@ -1,0 +1,183 @@
+Git Command (Cmd) Line Cheatsheet
+
+--------------------------------------------------------------------------------------------------
+Note that with something_name_here I mean put the name of that thing in that place.
+
+E.g. git branch branch_name_here means put the name of the branch you want to create.
+
+
+If I use quotation marks then this means that you should include quotation marks around the value
+that you are entering.
+
+E.g. "enter your username here" you should have your username enclosed in "", 
+	like git config --global user.name "2682261s"
+
+
+I may also include extra arguments in the cmd line argument. In this case, I will enclose these in
+square brackets, [], to showcase that they are optional
+---------------------------------------------------------------------------------------------------
+
+Git Configuration:
+
+	- To set up username and email configuration for git, use the following:
+
+		git config --global user.name "enter your username here"
+
+		git config --global user.email "enter your email here"
+
+===============================================================================================================================================
+
+Branching:
+
+	- To add a new branch, use the command:
+		git branch branch_name_here
+
+	- To see a list of availabe branches, use:
+		git branch
+
+	- The branch that has an * next to it is the CURRENT BRANCH THAT YOU ARE ON
+
+	- To move branches, use:
+		git checkout branch_name_here
+
+	- To merge branches we use:
+
+		git branch merge branch_name_here
+
+		This is essentially saying "with this branch '...' I want to merge it with this other branch '...'"
+
+	- To remove/delete a branch, use:
+		git branch -d branch_name_here
+
+===============================================================================================================================================
+
+Reverting to a Previous Commit:
+
+	- If you need to revert back to a previous commit, you can revert back to the most recent commit through:
+
+		git revert HEAD --no-edit
+		(Where --no-edit skips the commit message editor, providing the default revert message)
+
+
+	- To revert to another commit, use the following:
+
+		git revert HEAD~x    (where x is a number. 1 goes back once, 2 twice, etc....)
+
+
+	- Another useful command here is to see the log:
+
+		git log --oneline  (where --oneline justs prints at a line at a time)
+
+		This shows the commit hash (the first seven characters) and the commit message (follows the hash)
+
+===============================================================================================================================================
+
+Resetting the Repository to a Previous Commit:
+
+	- To reset back to a previous commit, first locate the commit hash using git log. 
+
+	- Next, use the following command:
+		git reset commit_hash_here
+
+	- Note that, even if commits don't show up in git log, they STILL EXIST in Git.
+
+===============================================================================================================================================
+Git Ignore Files:
+
+	- To create a .gitignore file, go to the root of the local Git and use the following:
+
+		touch .gitignore
+		(touch will create a new file if one doesn't already exist)
+
+		An example .gitignore file:
+
+			# ignore ALL .log files
+			*.log
+
+			# ignore ALL files in ANY directory named temp
+			temp/
+
+
+	- See the table below which specifies what you can include in a .gitignore file
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Pattern            | Explanation/Matches                                                                         | Examples                             |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | Blank lines are ignored                                                                     |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| # text comment     | Lines starting with # are ignored                                                           |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name               | All name files, name folders, and files and folders in any name folder                      | /name.log, /name/file.txt,           |
+|                    |                                                                                             | /lib/name.log                        |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name/              | Ending with / specifies the pattern is for a folder. Matches all files and folders          | /name/file.txt, /name/log/name.log   |
+|                    | in any name folder                                                                          |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name.log                                                                         |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name.file          | All files with the name.file                                                                | /name.file, /lib/name.file           |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| /name.file         | Starting with / specifies the pattern matches only files in the root folder                 | /name.file                           |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /lib/name.file                                                                    |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| lib/name.file      | Patterns specifying files in specific folders are always relative to root                   | /lib/name.file                       |
+|                    | (even if you do not start with /)                                                           |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: name.file, /test/lib/name.file                                                    |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| **/lib/name.file   | Starting with ** before / specifies that it matches any folder in the repository,           | /lib/name.file, /test/lib/name.file  |
+|                    | not just on root                                                                            |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| **/name            | All name folders, and files and folders in any name folder                                  | /name/log.file, /lib/name/log.file   |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| /lib/**/name       | All name folders, and files and folders in any name folder within the lib folder            | /lib/name/log.file,                  |
+|                    |                                                                                             | /lib/test/name/log.file              |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name/log.file                                                                    |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| *.file             | All files with .file extension                                                              | /name.file, /lib/name.file           |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| *name/             | All folders ending with name                                                                | /lastname/log.file,                  |
+|                    |                                                                                             | /firstname/log.file                  |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name?.file         | ? matches a single non-specific character                                                   | /names.file, /name1.file             |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /names1.file                                                                      |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name[a-z].file     | [range] matches a single character in the specified range (a-z, may also be numeric)        | /names.file, /nameb.file             |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name1.file                                                                       |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name[abc].file     | [set] matches a single character in the specified set of characters (a, b, or c)            | /namea.file, /nameb.file             |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /names.file                                                                       |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name[!abc].file    | [!set] matches a single character, except those specified in the set (a, b, or c)           | /names.file, /namex.file             |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /namesb.file                                                                      |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| *.file             | All files with .file extension                                                              | /name.file, /lib/name.file           |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| name/              |                                                                                             |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| !name/secret.log   | ! specifies a negation or exception. Matches all files and folders in any name folder,      | /name/file.txt, /name/log/name.log   |
+|                    | except name/secret.log                                                                      |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name/secret.log                                                                  |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| *.file             |                                                                                             |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| !name.file         | ! specifies a negation or exception. All files with .file extension, except name.file       | /log.file, /lastname.file            |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name.file                                                                        |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| *.file             |                                                                                             |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| !name/*.file       |                                                                                             |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| junk.*             | Adding new patterns after a negation will re-ignore a previously negated file               | /log.file                            |
+|                    | All files with .file extension, except those in name folder, unless the file is junk        | /name/log.file                       |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+|                    | no match: /name/junk.file                                                                   |                                      |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
